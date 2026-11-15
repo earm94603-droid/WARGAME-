@@ -31,15 +31,15 @@ jobs:
       - name: Install dependencies and build
         run: |
           cd game
-          PROJECT_DIR=$(dirname "$(find . -name package.json | head -1)")
+          PROJECT_DIR=$(dirname "$(find . -not -path '*/node_modules/*' -name package.json | head -1)")
           cd "$PROJECT_DIR"
-          npm ci --legacy-peer-deps
+          npm install --legacy-peer-deps
           npm run cap:build
 
       - name: Build APK
         run: |
           cd game
-          PROJECT_DIR=$(dirname "$(find . -name package.json | head -1)")
+          PROJECT_DIR=$(dirname "$(find . -not -path '*/node_modules/*' -name package.json | head -1)")
           cd "$PROJECT_DIR/android"
           chmod +x gradlew
           ./gradlew assembleDebug
