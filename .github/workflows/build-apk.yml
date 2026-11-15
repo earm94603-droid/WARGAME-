@@ -33,7 +33,7 @@ jobs:
           cd game
           PROJECT_DIR=$(dirname "$(find . -name package.json | head -1)")
           cd "$PROJECT_DIR"
-          npm ci
+          npm ci --legacy-peer-deps
           npm run cap:build
 
       - name: Build APK
